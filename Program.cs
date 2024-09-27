@@ -1,4 +1,5 @@
 using APIAssessment.Data;
+using APIAssessment.Repository;
 using APIAssessment.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -17,7 +18,10 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Register your repositories and services
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
+
 builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
