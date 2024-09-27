@@ -1,13 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using APIAssessment.Models;
-using APIAssessment.Models.Dtos;
+﻿using APIAssessment.Models.Dtos;
 using APIAssessment.Models.Enums;
+using APIAssessment.Models;
 using APIAssessment.Repository;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace APIAssessment.Services
 {
-    public class PlayerService
+    public class PlayerService : IPlayerService // Ensure this line is correct
     {
         private readonly IPlayerRepository _playerRepository;
 
@@ -15,8 +16,6 @@ namespace APIAssessment.Services
         {
             _playerRepository = playerRepository;
         }
-
-
 
         public async Task<PagedResult<PlayerCasinoWager>> GetPlayerWagers(Guid playerId, int page, int pageSize)
         {
@@ -48,6 +47,5 @@ namespace APIAssessment.Services
             // Call the repository to save the new wager
             return await _playerRepository.AddWagerAsync(newWager);
         }
-
     }
 }
